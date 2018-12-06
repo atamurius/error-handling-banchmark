@@ -8,4 +8,12 @@ package object errorhandling {
     def parse(data: Map[String, String]): Result[Person]
   }
 
+  val parsers: Map[String, PersonParser] = Seq(
+    ThrowParser,
+    ThrowNSTParser,
+    TryParser,
+    EitherParser,
+    ValidatedParser
+  ).map(p => p.productPrefix.stripSuffix("Parser") -> p).toMap
+
 }
