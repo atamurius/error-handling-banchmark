@@ -16,8 +16,8 @@ object Performance extends Bench.LocalTime {
         case _ => Some("correct name")
       }),
       "age" -> (Random.nextDouble() match {
-        case x if x < failureChance * 0.5 => None
-//        case x if x < failureChance * 0.7 => Some(s"wrong")
+        case x if x < failureChance * 0.25 => None
+//        case x if x < failureChance * 0.75 => Some("wrong")
         case x if x < failureChance => Some(s"-${Random.nextInt(100)}")
         case _ => Some(s"${Random.nextInt(80) + 1}")
       }),
@@ -50,7 +50,7 @@ object Performance extends Bench.LocalTime {
       (2.0 until 10 by 0.5)
     ).map(DataSet(_, 15000))
 
-  private val dataSets = smallDataSet.map(d => d.toString -> d).toMap
+  private val dataSets = fullDataSet.map(d => d.toString -> d).toMap
 
   private val parserGen = Gen.enumeration("Type")(parsers.keys.toSeq: _*).map(parsers)
 
